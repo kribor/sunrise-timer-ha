@@ -1,14 +1,17 @@
 {
   "name": "sunrise-timer-ha",
   "scripts": {
-    "prepare": "husky install"
+    "start": "tsn src/sunrise-timer.ts"
   },
   "dependencies": {
     "@naturalcycles/js-lib": "^14.69.3",
-    "@naturalcycles/nodejs-lib": "^12.55.0"
+    "js-yaml": "^4.1.0",
+    "oauth-1.0a": "^2.2.6",
+    "suncalc": "^1.8.0"
   },
   "devDependencies": {
     "@naturalcycles/dev-lib": "^12.12.2",
+    "@types/js-yaml": "^4.0.4",
     "@types/node": "^16.11.7",
     "jest": "^27.3.1"
   },
@@ -30,7 +33,7 @@
     "url": "https://github.com/kribor/sunrise-timer-ha"
   },
   "engines": {
-    "node": ">=14.16.0"
+    "node": ">=14.15.0"
   },
   "version": "0.0.0",
   "description": "",
