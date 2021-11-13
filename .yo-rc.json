@@ -1,0 +1,20 @@
+{
+  "@naturalcycles/generator-nodejs-lib": {
+    "promptValues": {
+      "npmName": "sunrise-timer-ha",
+      "githubOrg": "kribor",
+      "githubRepoName": "sunrise-timer-ha",
+      "moduleAuthor": "Kristofer Borgström",
+      "npmAccess": "public"
+    },
+    "answers": {
+      "npmName": "sunrise-timer-ha",
+      "githubOrg": "kribor",
+      "githubRepoName": "sunrise-timer-ha",
+      "moduleAuthor": "Kristofer Borgström",
+      "npmNameWithoutScope": "sunrise-timer-ha",
+      "githubFullName": "kribor/sunrise-timer-ha",
+      "npmAccess": "public"
+    }
+  }
+}
