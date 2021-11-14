@@ -7,8 +7,9 @@ RUN mkdir -p /opt/app
 WORKDIR /opt/app
 
 COPY *.json yarn.lock *.yaml /opt/app/
-COPY src /opt/app/src
 
 RUN yarn --pure-lockfile
+
+COPY src /opt/app/src
 
 CMD yarn start

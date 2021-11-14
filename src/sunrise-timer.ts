@@ -19,12 +19,14 @@ export function runScript(fn: (...args: any[]) => any): void {
   })()
 }
 
+process.env['TZ'] = config.timezone
 
 runScript(async () => {
 
   console.log("Start sunrise timer")
   console.log(`Using controller: ${config.dimmer_controller}`)
+  console.log(`Timezone: ${process.env['TZ']}`)
 
-  await run()
+  await run(config)
 
 })

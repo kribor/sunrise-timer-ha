@@ -1,39 +1,46 @@
 
 import {dayjs, IDayjs} from "@naturalcycles/time-lib";
 import {config, SunriseTimerConfig} from "./config.service";
+import {Controller} from "../controller/controller";
 
-var suncalc = require('suncalc');
+const suncalc = require('suncalc');
+let dimState: number = -1
 
-export async function run(): Promise<void> {
+export async function run(cfg: SunriseTimerConfig): Promise<void> {
     console.log("Timer starting")
-    let dimState: number = -1
 
     // controller shall export "controller"
     const { controller  } = await import(`../controller/${config.dimmer_controller}`)
 
     while (true) {
-        let dimLevel = determineDimLevel(dayjs(), config)
-
-        // Handle increments
-        if (dimLevel > 1 && dimLevel < 100) {
-            dimLevel = dimLevel - dimLevel % config.dimmer_step
-        }
-
-        //Avoid unnecessary api calls
-        if (dimLevel !== dimState) {
-            if (dimLevel === 0) {
-                await controller.toggleLight(false, config)
-            } else if (dimLevel === 100) {
-                await controller.toggleLight(true, config)
-            } else {
-                await controller.dimLight(dimLevel, config)
-            }
-            dimState = dimLevel
-        }
-
+        await _singleExec(controller, cfg)
         //Evaluate again in 1 minute
         await delay(1000 * 60)
     }
+}
+
+export async function _singleExec(controller: Controller, cfg: SunriseTimerConfig): Promise<number> {
+  let dimLevel = determineDimLevel(dayjs(), config)
+
+  // Handle increments
+  if (dimLevel > 0 && dimLevel < 100) {
+    const dimInterval: number = cfg.dimmer_max - cfg.dimmer_min
+    const dimLevelPrecise = cfg.dimmer_min + Math.floor(dimLevel * dimInterval / 100)
+    dimLevel = dimLevelPrecise - dimLevelPrecise % config.dimmer_step
+  }
+
+  //Avoid unnecessary api calls
+  if (dimLevel !== dimState) {
+    if (dimLevel === 0) {
+      await controller.toggleLight(false, config)
+    } else if (dimLevel === 100) {
+      await controller.toggleLight(true, config)
+    } else {
+      await controller.dimLight(dimLevel, config)
+    }
+    dimState = dimLevel
+  }
+  return dimState
 }
 
 export function determineDimLevel(now: IDayjs, cfg: SunriseTimerConfig): number {
