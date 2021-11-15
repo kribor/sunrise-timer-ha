@@ -26,6 +26,7 @@ Example config:
 
 ```
 # Location & max sun angle for artificial light
+max_sun_angle: 3, # degrees over the horizon at which time light can be turned off as it's light-enough anyway, default 5
 latitude: 60.025369
 longitude: 17.669363
 

@@ -29,7 +29,7 @@ try {
 
 export const config: SunriseTimerConfig = {
   timezone: 'Europe/Stockholm',
-  max_sun_angle: 7, // degrees over the horizon at which time light can be turned off as it's light-enough anyway
+  max_sun_angle: 5, // degrees over the horizon at which time light can be turned off as it's light-enough anyway
   latitude: 60.025369,
   longitude: 17.669363,
 
