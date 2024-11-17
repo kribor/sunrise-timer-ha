@@ -19,7 +19,7 @@ const token = {
   secret: process.env['TELLDUS_ACCESS_TOKEN_SECRET']
 } as Token;
 
-const baseUrl = 'https://api.telldus.com/json'
+const baseUrl = 'https://pa-api.telldus.com/json'
 
 const telldusGot = getGot({
     logStart: true,

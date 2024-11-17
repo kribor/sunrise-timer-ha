@@ -1,4 +1,9 @@
-FROM node:16
+# docker build -t kribor/sunrise-timer-ha:20241116 .
+# docker push -t kribor/sunrise-timer-ha:20241116
+# docker build -t kribor/sunrise-timer-ha:latest .
+# docker push -t kribor/sunrise-timer-ha:latest
+
+FROM node:18
 
 RUN apt-get update && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN npm install -g nodemon
